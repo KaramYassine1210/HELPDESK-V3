@@ -6,6 +6,29 @@ Ce flow Langflow implémente un système automatique de traitement des requêtes
 
 ## Architecture générale
 
+```mermaid
+flowchart TD
+    A[ChatInput] --> B[GroqModel DCjzz<br/>LLM routeur]
+    B --> C[SmartRouter 5zlTW<br/>Classification faq / ticket_creation]
+    
+    C -->|faq| D[GroqModel 0nM1Y<br/>Extraction mots-clés]
+    D --> E[NotionListPages nDbjA<br/>Recherche FAQ]
+    E --> F[TypeConverter N5eo2]
+    F --> G[GroqModel UsUTe<br/>Extraction réponse]
+    G --> H[ChatOutput cZVBD]
+    
+    C -->|ticket_creation| I[SmartRouter RAuXY<br/>Classification Urgent / Non urgent]
+    I --> J[GroqModel eAA9p<br/>Création page Notion]
+    J --> K[NotionPageCreator 3vDjw]
+    K --> L[TypeConverter Po6Pq]
+    L --> M[GroqModel s82cE<br/>Message confirmation]
+    M --> N[ChatOutput 4EJNY]
+    
+    A --> O[SaveToFile YBabM<br/>Sauvegarde entrée]
+    H --> P[SaveToFile fTsKJ]
+    N --> Q[SaveToFile XdLPC]
+```
+
 ---
 
 ## 1. Entrée utilisateur
